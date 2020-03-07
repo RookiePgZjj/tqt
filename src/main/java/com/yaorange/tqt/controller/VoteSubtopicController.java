@@ -21,7 +21,12 @@ public class VoteSubtopicController {
     @Autowired
     private VoteSubtopicServiceImpl voteSubtopicService;
 
-    @GetMapping("/{parentId}")
+    /**
+     * 根据父id查询问卷
+     * @param parentId
+     * @return
+     */
+    @GetMapping("/all/{parentId}")
     public List<Votesubtopic> queryByParentId(@PathVariable("parentId")Long parentId){
         return voteSubtopicService.findByParentId(parentId);
     }

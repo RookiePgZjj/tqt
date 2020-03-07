@@ -23,9 +23,7 @@ public class VoteSubtopicServiceImpl implements VoteSubtopicService {
 
     @Override
     public List<Votesubtopic> findByParentId(Long parentId) {
-        Votesubtopic example = new Votesubtopic();
-        example.setParentId(parentId);
-        List<Votesubtopic> votesubtopics = voteSubtopicMapper.selectByExample(example);
+        List<Votesubtopic> votesubtopics = voteSubtopicMapper.selectByParentId(parentId);
         return votesubtopics;
     }
 }
