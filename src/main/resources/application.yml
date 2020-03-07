@@ -1,0 +1,12 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/tfs?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
