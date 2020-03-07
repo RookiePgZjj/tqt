@@ -86,4 +86,10 @@ public class UserController {
         return true;
     }
 
+
+    @PutMapping("role")
+    public  ResponseEntity<Void> updateRole(@RequestBody User user){
+        userService.updateRole(user);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -66,15 +66,13 @@ public class InterviewServiceImpl implements InterviewService {
         Example.Criteria criteria = example.createCriteria();
 
         if (classId != null) {
-            criteria.andLike("class_id", classId.toString());
+            criteria.andLike("classId", "%"+classId+"%");
         }
-
         if (!"".equals(stuName)) {
-            criteria.andLike("stu_name", stuName);
+            criteria.andLike("stuName", "%"+stuName+"%");
         }
-
         if (!"".equals(companyName)) {
-            criteria.andLike("companyName", companyName);
+            criteria.andLike("companyName", "%"+companyName+"%");
         }
         PageHelper.startPage(pageNo, pageSize);
         Page<Interview> interviews = (Page<Interview>) interviewMapper.selectByExample(example);
@@ -130,13 +128,13 @@ public class InterviewServiceImpl implements InterviewService {
             String stuName = serachFormVO.getStuName();
             String companyName = serachFormVO.getCompanyName();
             if (classId != null) {
-                criteria.andLike("classId", classId.toString());
+                criteria.andLike("classId", "%"+classId+"%");
             }
             if (!"".equals(stuName)) {
-                criteria.andLike("stuName", stuName);
+                criteria.andLike("stuName", "%"+stuName+"%");
             }
             if (!"".equals(companyName)) {
-                criteria.andLike("companyName", companyName);
+                criteria.andLike("companyName", "%"+companyName+"%");
             }
             PageHelper.startPage(pageNo,pageSize);
             Page<Interview> interviews = (Page<Interview>) interviewMapper.selectByExample(example);
