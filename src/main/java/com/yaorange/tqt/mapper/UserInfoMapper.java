@@ -1,6 +1,5 @@
 package com.yaorange.tqt.mapper;
 
-import com.yaorange.tqt.pojo.User;
 import com.yaorange.tqt.pojo.UserInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

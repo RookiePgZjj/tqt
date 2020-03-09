@@ -3,13 +3,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
-@Table ( name ="sys_user" )
+@Table( name ="sys_user" )
 public class User implements Serializable {
 
 	private static final long serialVersionUID =  4300715037170048423L;

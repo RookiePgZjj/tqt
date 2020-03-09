@@ -20,4 +20,6 @@ public interface UserService {
     List<User> findAllTeacers();
 
     String findNameByUserId(long userId);
+
+    void updateRole(User user);
 }

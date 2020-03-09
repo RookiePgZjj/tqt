@@ -5,182 +5,182 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
 @Table ( name ="tea_face_back" )
 public class TeaFaceBack  implements Serializable {
 
-	private static final long serialVersionUID =  8140561235148226589L;
+    private static final long serialVersionUID =  8140561235148226589L;
 
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-   	@Column(name = "id" )
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" )
+    private Long id;
 
-	/**
-	 * 学员名
-	 */
-   	@Column(name = "user_id" )
-	private Long userId;
+    /**
+     * 学员名
+     */
+    @Column(name = "user_id" )
+    private Long userId;
 
-	/**
-	 * 课程
-	 */
-   	@Column(name = "course_id" )
-	private Long courseId;
+    /**
+     * 课程
+     */
+    @Column(name = "course_id" )
+    private Long courseId;
 
-	/**
-	 * 第几天
-	 */
-   	@Column(name = "date_number" )
-	private Long dateNumber;
+    /**
+     * 第几天
+     */
+    @Column(name = "date_number" )
+    private Long dateNumber;
 
-	/**
-	 * 吸收情况
-	 */
-   	@Column(name = "absorption" )
-	private String absorption;
+    /**
+     * 吸收情况
+     */
+    @Column(name = "absorption" )
+    private String absorption;
 
-	/**
-	 * 不清楚的地方
-	 */
-   	@Column(name = "probleam" )
-	private String probleam;
+    /**
+     * 不清楚的地方
+     */
+    @Column(name = "probleam" )
+    private String probleam;
 
-	/**
-	 * 提交日期
-	 */
-   	@Column(name = "sub_date" )
-	private Date subDate;
+    /**
+     * 提交日期
+     */
+    @Column(name = "sub_date" )
+    private Date subDate;
 
-	/**
-	 * 明日目标
-	 */
-   	@Column(name = "goal" )
-	private String goal;
+    /**
+     * 明日目标
+     */
+    @Column(name = "goal" )
+    private String goal;
 
-	/**
-	 * 方案
-	 */
-   	@Column(name = "programme" )
-	private String programme;
+    /**
+     * 方案
+     */
+    @Column(name = "programme" )
+    private String programme;
 
-	/**
-	 * 自我觉察
-	 */
-   	@Column(name = "detect" )
-	private String detect;
+    /**
+     * 自我觉察
+     */
+    @Column(name = "detect" )
+    private String detect;
 
-	/**
-	 * 调整方案
-	 */
-   	@Column(name = "adjustment" )
-	private String adjustment;
-
-
-   	@Transient
-	private TeaCourse course;
+    /**
+     * 调整方案
+     */
+    @Column(name = "adjustment" )
+    private String adjustment;
 
 
-	public TeaCourse getCourse() {
-		return course;
-	}
+    @Transient
+    private TeaCourse course;
 
-	public void setCourse(TeaCourse course) {
-		this.course = course;
-	}
 
-	public Long getId() {
-		return this.id;
-	}
+    public TeaCourse getCourse() {
+        return course;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setCourse(TeaCourse course) {
+        this.course = course;
+    }
 
-	public Long getUserId() {
-		return this.userId;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getCourseId() {
-		return this.courseId;
-	}
+    public Long getUserId() {
+        return this.userId;
+    }
 
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public Long getDateNumber() {
-		return this.dateNumber;
-	}
+    public Long getCourseId() {
+        return this.courseId;
+    }
 
-	public void setDateNumber(Long dateNumber) {
-		this.dateNumber = dateNumber;
-	}
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 
-	public String getAbsorption() {
-		return this.absorption;
-	}
+    public Long getDateNumber() {
+        return this.dateNumber;
+    }
 
-	public void setAbsorption(String absorption) {
-		this.absorption = absorption;
-	}
+    public void setDateNumber(Long dateNumber) {
+        this.dateNumber = dateNumber;
+    }
 
-	public String getProbleam() {
-		return this.probleam;
-	}
+    public String getAbsorption() {
+        return this.absorption;
+    }
 
-	public void setProbleam(String probleam) {
-		this.probleam = probleam;
-	}
+    public void setAbsorption(String absorption) {
+        this.absorption = absorption;
+    }
 
-	public Date getSubDate() {
-		return this.subDate;
-	}
+    public String getProbleam() {
+        return this.probleam;
+    }
 
-	public void setSubDate(Date subDate) {
-		this.subDate = subDate;
-	}
+    public void setProbleam(String probleam) {
+        this.probleam = probleam;
+    }
 
-	public String getGoal() {
-		return this.goal;
-	}
+    public Date getSubDate() {
+        return this.subDate;
+    }
 
-	public void setGoal(String goal) {
-		this.goal = goal;
-	}
+    public void setSubDate(Date subDate) {
+        this.subDate = subDate;
+    }
 
-	public String getProgramme() {
-		return this.programme;
-	}
+    public String getGoal() {
+        return this.goal;
+    }
 
-	public void setProgramme(String programme) {
-		this.programme = programme;
-	}
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
 
-	public String getDetect() {
-		return this.detect;
-	}
+    public String getProgramme() {
+        return this.programme;
+    }
 
-	public void setDetect(String detect) {
-		this.detect = detect;
-	}
+    public void setProgramme(String programme) {
+        this.programme = programme;
+    }
 
-	public String getAdjustment() {
-		return this.adjustment;
-	}
+    public String getDetect() {
+        return this.detect;
+    }
 
-	public void setAdjustment(String adjustment) {
-		this.adjustment = adjustment;
-	}
+    public void setDetect(String detect) {
+        this.detect = detect;
+    }
+
+    public String getAdjustment() {
+        return this.adjustment;
+    }
+
+    public void setAdjustment(String adjustment) {
+        this.adjustment = adjustment;
+    }
 
 }

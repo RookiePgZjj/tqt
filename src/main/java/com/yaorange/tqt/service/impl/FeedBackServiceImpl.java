@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class FeedBackServiceImpl implements FeedBackService {
 
-    @Autowired
+    @Resource
     private FeedBackMapper feedBackMapper;
 
     @Autowired

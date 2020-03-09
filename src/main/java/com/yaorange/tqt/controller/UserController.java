@@ -16,7 +16,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
-
+    /**
+     * ，第一次加载，搜索
+     * */
     @PostMapping("search")
     public ResponseEntity<PageResult<User>> pageUser(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                                      @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -33,7 +35,9 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    //判断用户名是否已经存在
+    /*
+    *判断用户名是否已经存在
+    * */
     @GetMapping("checkUsername")
     public ResponseEntity<String> checkUsername(@RequestParam("userName") String userName, @RequestParam("access_token") String access_token) {
         User sysUser = userService.checkUsername(userName);
@@ -43,20 +47,25 @@ public class UserController {
         }
         return ResponseEntity.ok("1");
     }
-
+    /**
+     * 新增
+     * */
     @PostMapping("addUser")
     public ResponseEntity<Void> addUser(@RequestBody User sysUser, @RequestParam("access_token") String access_token) {
         userService.addUser(sysUser);
         return ResponseEntity.ok().build();
     }
-
+    /***
+     * 跟新
+     */
     @PutMapping("update")
     public ResponseEntity<Void> updateUser(@RequestBody User sysUser, @RequestParam("access_token") String access_token) {
-        System.out.println(sysUser);
         userService.updateUser(sysUser);
         return ResponseEntity.ok().build();
     }
-
+    /**
+     * 批量删除
+     * */
     @DeleteMapping("delete")
     public ResponseEntity<String> deleteUser(@RequestBody String[] userIds) {
         System.out.println(userIds);
@@ -84,6 +93,11 @@ public class UserController {
     @GetMapping("/info")
     public Boolean getInfo(@RequestParam("access_token") String token) {
         return true;
+    }
+@PutMapping("role")
+    public ResponseEntity<Void> updateRole(@RequestBody User user){
+        userService.updateRole(user);
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public PageResult<User> pageUser(Integer pageNo,Integer pageSize,SeachUser seachUser) {
+    public PageResult<User> pageUser(Integer pageNo, Integer pageSize, SeachUser seachUser) {
 
         PageHelper.startPage(pageNo, pageSize);
         List<User> sysUsers = new ArrayList<User>();
@@ -133,11 +133,15 @@ public class UserServiceImpl implements UserService {
             //根据Id查找到userInfo
             Example example = new Example(UserInfo.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("userId",Integer.valueOf(userId));
+            criteria.andEqualTo("userId", Integer.valueOf(userId));
             UserInfo sysUserInfo = userInfoMapper.selectOneByExample(example);
             userInfoMapper.delete(sysUserInfo);
             userMapper.deleteByPrimaryKey(userId);
         }
 
+    }
+   @Override
+    public void updateRole(User user) {
+        userMapper.updateByPrimaryKey(user);
     }
 }
