@@ -31,7 +31,7 @@ public class RoleController {
     @GetMapping
     public ResponseEntity<PageResult<Role>> pageRole(@RequestParam(value = "pageNo",required = false) Integer pageNo,
                                                      @RequestParam(value = "pageSize",required = false) Integer pageSize,
-                                                     @RequestParam(value = "name" ,required = false)String roleName){
+                                                     @RequestParam(value = "name" ,required = false) String roleName){
         PageResult<Role> result =  roleService.pageRole(pageNo,pageSize,roleName);
         return ResponseEntity.ok(result);
     }

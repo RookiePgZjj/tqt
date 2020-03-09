@@ -6,9 +6,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 
-
 @Entity
 @Table ( name ="role_model" )
+
 public class RoleModel  implements Serializable {
 
 	private static final long serialVersionUID =  5976322549276114089L;

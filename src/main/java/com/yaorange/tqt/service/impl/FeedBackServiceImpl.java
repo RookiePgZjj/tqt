@@ -2,6 +2,7 @@ package com.yaorange.tqt.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.yaorange.tqt.mapper.CourseMapper;
 import com.yaorange.tqt.mapper.FeedBackMapper;
 import com.yaorange.tqt.mapper.UserInfoMapper;
 import com.yaorange.tqt.mapper.UserMapper;
@@ -25,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,6 +44,7 @@ public class FeedBackServiceImpl implements FeedBackService {
     @Autowired
     private FeedBackMapper feedBackMapper;
 
+
     @Autowired
     private CourseMapper courseMapper;
 
@@ -52,8 +53,8 @@ public class FeedBackServiceImpl implements FeedBackService {
     private UserInfoMapper userInfoMapper;
 
 
-    @Resource
-    private UserInfoMapper userInfoMapper;
+    @Autowired
+    private CourseServiceImpl courseService;
 
 
     @Override

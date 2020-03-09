@@ -50,8 +50,42 @@ public class ModelController {
     @GetMapping
     public ResponseEntity<PageResult<Model>> pageRole(@RequestParam(value = "pageNo",required = false) Integer pageNo,
                                                       @RequestParam(value = "pageSize",required = false) Integer pageSize,
-                                                      @RequestParam(value = "keyWord" ,required = false)String keyWord){
+                                                      @RequestParam(value = "keyWord" ,required = false) String keyWord){
         PageResult<Model> result =  modelService.pageRole(pageNo,pageSize,keyWord);
         return ResponseEntity.ok(result);
+    }
+//    http://localhost:9999/api/module/getParent/0?access_token=test-token
+    /**
+     * 查询所有父模块
+     * */
+    @GetMapping("getParent/{parentId}")
+    public ResponseEntity<List<Model>> getParent(@PathVariable("parentId")Integer parentId){
+        List<Model> result = modelService.getParent(parentId);
+        return ResponseEntity.ok(result);
+    }
+    /**
+     * 新增模块
+     * */
+    @PostMapping
+    public ResponseEntity<Void> addModel(@RequestBody Model model){
+        modelService.addModel(model);
+        return ResponseEntity.ok().build();
+    }
+    /***
+     * 修改模块
+     * */
+    @PutMapping
+    public ResponseEntity<Void> updateModel(@RequestBody Model model){
+        modelService.updateModel(model);
+        return ResponseEntity.ok().build();
+    }
+
+    /***
+     * 删除
+     * */
+    @DeleteMapping
+    public ResponseEntity<String> deleteModel(@RequestBody Integer[] mids){
+        modelService.deleteModel(mids);
+        return ResponseEntity.ok("1");
     }
 }

@@ -7,13 +7,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-07 
+ * @Date 2020-03-07
  */
 
 @Entity
-@Table ( name ="sys_user_info" )
+@Table( name ="sys_user_info" )
 public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID =  4428862416774062511L;
@@ -117,8 +117,8 @@ public class UserInfo implements Serializable {
 	/**
 	 * 入职日期
 	 */
-   	@Column(name = "jion_Date" )
-	private Date jionDate;
+   	@Column(name = "join_Date" )
+	private Date joinDate;
 
 	/**
 	 * 等级
@@ -287,11 +287,11 @@ public class UserInfo implements Serializable {
 	}
 
 	public Date getJionDate() {
-		return this.jionDate;
+		return this.joinDate;
 	}
 
-	public void setJionDate(Date jionDate) {
-		this.jionDate = jionDate;
+	public void setJionDate(Date joinDate) {
+		this.joinDate = joinDate;
 	}
 
 	public Long getDegree() {

@@ -12,4 +12,11 @@ public interface ModelService {
 
     PageResult<Model> pageRole(Integer pageNo, Integer pageSize, String roleName);
 
+    List<Model> getParent(Integer parentId);
+
+    void addModel(Model model);
+
+    void updateModel(Model model);
+
+    void deleteModel(Integer[] mids);
 }

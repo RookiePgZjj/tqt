@@ -9,6 +9,7 @@ import com.yaorange.tqt.pojo.RoleModel;
 import com.yaorange.tqt.service.RoleService;
 import com.yaorange.tqt.utils.PageResult;
 import com.yaorange.tqt.vo.MIdsRole;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
@@ -16,13 +17,14 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
     @Resource
     private RoleMapper roleMapper;
 
-    @Resource
+    @Autowired
     private RoleModelMapper roleModelMapper;
     @Override
     public List<Role> findAll() {
@@ -63,11 +65,16 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void updateRole(MIdsRole mIdsRole) {
         roleMapper.updateByPrimaryKey(mIdsRole);
+        RoleModel roleModel = new RoleModel();
+        roleModel.setRoleId(mIdsRole.getRoleId());
+        //根据roleId删除之前的数据
+        roleModelMapper.delete(roleModel);
         for(String mids:mIdsRole.getModuleIds()){
-            RoleModel roleModel = new RoleModel();
-            roleModel.setRoleId(mIdsRole.getRoleId());
-            roleModel.setModelId(Integer.valueOf(mids));
-            roleModelMapper.insert(roleModel);
+            //新增
+            RoleModel roleModel1 = new RoleModel();
+            roleModel1.setRoleId(mIdsRole.getRoleId());
+            roleModel1.setModelId(Integer.valueOf(mids));
+            roleModelMapper.insert(roleModel1);
         }
     }
 
