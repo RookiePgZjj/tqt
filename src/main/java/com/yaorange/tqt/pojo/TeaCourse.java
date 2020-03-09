@@ -3,9 +3,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
@@ -30,7 +30,7 @@ public class TeaCourse  implements Serializable {
 	 * 状态：0未启用，1启用
 	 */
    	@Column(name = "status" )
-	private Long status;
+	private Long state;
 
 	public Long getCourseId() {
 		return this.courseId;
@@ -48,11 +48,11 @@ public class TeaCourse  implements Serializable {
 		this.name = name;
 	}
 
-	public Long getStatus() {
-		return this.status;
+	public Long getState() {
+		return state;
 	}
 
-	public void setStatus(Long status) {
-		this.status = status;
+	public void setState(Long state) {
+		this.state = state;
 	}
 }

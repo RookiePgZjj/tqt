@@ -20,4 +20,9 @@ public interface UserService {
     List<User> findAllTeacers();
 
     String findNameByUserId(long userId);
+
+    List<User> selectByClassId(Long classId);
+
+    List<User> selectAll();
+
 }

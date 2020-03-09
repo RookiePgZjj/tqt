@@ -2,8 +2,10 @@ package com.yaorange.tqt.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yaorange.tqt.mapper.ClassMapper;
 import com.yaorange.tqt.mapper.UserInfoMapper;
 import com.yaorange.tqt.mapper.UserMapper;
+import com.yaorange.tqt.pojo.Class;
 import com.yaorange.tqt.pojo.User;
 import com.yaorange.tqt.pojo.UserInfo;
 import com.yaorange.tqt.service.UserService;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+    @Resource
+    private ClassMapper classMapper;
+
     @Override
     public List<User> findAllTeacers() {
         List<User> users = userMapper.selectTeachers();
@@ -46,6 +52,31 @@ public class UserServiceImpl implements UserService {
     public String findNameByUserId(long userId) {
 
         return userInfoMapper.selectByUserId(userId).getName();
+    }
+
+    @Override
+    public List<User> selectByClassId(Long classId) {
+        List<User> userList = userMapper.selectByClassId(classId);
+        for (User user :userList) {
+            Long classId1 = user.getClassId();
+            Class aClass = classMapper.selectByPrimaryKey(classId1);
+            user.setAclass(aClass);
+            Long userId = user.getUserId();
+            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
+            user.setUserInfo(userInfo);
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> selectAll() {
+        List<User> userList = userMapper.selectAll();
+        for (User user:userList) {
+            Long userId = user.getUserId();
+            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
+            user.setUserInfo(userInfo);
+        }
+        return userList;
     }
 
 

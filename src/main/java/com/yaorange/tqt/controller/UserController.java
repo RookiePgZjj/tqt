@@ -85,5 +85,18 @@ public class UserController {
     public Boolean getInfo(@RequestParam("access_token") String token) {
         return true;
     }
-
+    /**
+     * 查询班级里的学生
+     */
+    @GetMapping("/stu_list/{classId}")
+    public List<User> query(@PathVariable("classId") Long classId){
+        return userService.selectByClassId(classId);
+    }
+    /**
+     * 查询所有学生信息
+     */
+    @GetMapping("all")
+    public List<User> selectAll(){
+        return userService.selectAll();
+    }
 }
