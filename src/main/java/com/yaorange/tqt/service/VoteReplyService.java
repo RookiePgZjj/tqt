@@ -1,6 +1,8 @@
 package com.yaorange.tqt.service;
 
 import com.yaorange.tqt.pojo.VoteReply;
+import com.yaorange.tqt.vo.VoteRecordVO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -11,5 +13,7 @@ import java.util.List;
  */
 public interface VoteReplyService {
 
-    void addVoteReplies(Long voteTopicId, List<VoteReply> voteReplies);
+    void addVoteReplies(String voteTopicId, List<VoteReply> voteReplies);
+
+    List<VoteRecordVO> selectVoteRecord(String voteTopicId);
 }

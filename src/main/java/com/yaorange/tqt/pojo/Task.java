@@ -16,9 +16,8 @@ public class Task  implements Serializable {
 	private static final long serialVersionUID =  6498764403102763394L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-   	@Column(name = "task_id" )
-	private Long taskId;
+   	@Column(name = "id" )
+	private String id;
 
 	/**
 	 * 名字
@@ -47,12 +46,12 @@ public class Task  implements Serializable {
 		this.userId = userId;
 	}
 
-	public Long getTaskId() {
-		return this.taskId;
+	public String getId() {
+		return id;
 	}
 
-	public void setTaskId(Long taskId) {
-		this.taskId = taskId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {

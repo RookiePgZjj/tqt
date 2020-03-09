@@ -2,6 +2,7 @@ package com.yaorange.tqt.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description  
@@ -42,7 +43,36 @@ public class Votesubtopic  implements Serializable {
 	 * 父id
 	 */
    	@Column(name = "parent_id" )
-	private Long parentId;
+	private String parentId;
+
+
+	/**
+	 * 得分
+	 * @return
+	 */
+	@Column(name = "reply")
+	private Long reply;
+
+
+	@Transient
+	private List<VoteReply> voteReplyList;
+
+
+	public List<VoteReply> getVoteReplyList() {
+		return voteReplyList;
+	}
+
+	public void setVoteReplyList(List<VoteReply> voteReplyList) {
+		this.voteReplyList = voteReplyList;
+	}
+
+	public Long getReply() {
+		return reply;
+	}
+
+	public void setReply(Long reply) {
+		this.reply = reply;
+	}
 
 	public Long getId() {
 		return this.id;
@@ -76,10 +106,10 @@ public class Votesubtopic  implements Serializable {
 		this.priority = priority;
 	}
 
-	public Long getParentId() {
+	public String getParentId() {
 		return parentId;
 	}
-	public void setParentId(Long parentId) {
+	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
 }

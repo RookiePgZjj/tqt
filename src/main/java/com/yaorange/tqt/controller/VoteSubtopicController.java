@@ -27,7 +27,7 @@ public class VoteSubtopicController {
      * @return
      */
     @GetMapping("/all/{parentId}")
-    public List<Votesubtopic> queryByParentId(@PathVariable("parentId")Long parentId){
+    public List<Votesubtopic> queryByParentId(@PathVariable("parentId")String parentId){
         return voteSubtopicService.findByParentId(parentId);
     }
 }

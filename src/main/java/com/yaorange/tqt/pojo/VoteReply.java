@@ -32,8 +32,8 @@ public class VoteReply  implements Serializable {
    	@Column(name = "id" )
 	private Long id;
 
-   	@Column(name = "teacher_id" )
-	private Long teacherId;
+   	@Column(name = "user_id" )
+	private Long userId;
 
 	public Long getSubtopicId() {
 		return this.subtopicId;
@@ -59,12 +59,11 @@ public class VoteReply  implements Serializable {
 		this.id = id;
 	}
 
-	public Long getTeacherId() {
-		return this.teacherId;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setTeacherId(Long teacherId) {
-		this.teacherId = teacherId;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-
 }

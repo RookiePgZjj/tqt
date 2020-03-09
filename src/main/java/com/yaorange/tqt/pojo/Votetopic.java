@@ -1,7 +1,10 @@
 package com.yaorange.tqt.pojo;
 
+import com.yaorange.tqt.vo.ItemVO;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description  
@@ -16,9 +19,8 @@ public class Votetopic  implements Serializable {
 	private static final long serialVersionUID =  2329457485902278032L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
    	@Column(name = "id" )
-	private Long id;
+	private String id;
 
    	@Column(name = "title" )
 	private String title;
@@ -42,38 +44,78 @@ public class Votetopic  implements Serializable {
 	private Long userId;
 
 	/**
-	 * 调查项目
+	 * 总投票数
 	 */
-   	@Column(name = "items" )
-	private String items;
+   	@Column(name = "total_count" )
+	private Integer totalCount;
+
+
+   	@Column(name = "items")
+	private String item;
 
 	/**
 	 * 老师名字
 	 */
-   	@Column(name = "teacherName" )
+	@Transient
 	private String teacherName;
 
+	@Transient
+	private User teacher;
 
-	/**
-	 * 班级名
-	 */
-	@Column(name = "className" )
-	private String className;
+	@Transient
+	private Class classes;
 
+	@Transient
+	private List<ItemVO> items;
 
-	public String getClassName() {
-		return className;
+	@Transient
+	private List<Votesubtopic> voteSubtopicList;
+
+	public String getItem() {
+		return item;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setItem(String item) {
+		this.item = item;
 	}
 
-	public Long getId() {
+	public List<ItemVO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemVO> items) {
+		this.items = items;
+	}
+
+	public List<Votesubtopic> getVoteSubtopicList() {
+		return voteSubtopicList;
+	}
+
+	public void setVoteSubtopicList(List<Votesubtopic> voteSubtopicList) {
+		this.voteSubtopicList = voteSubtopicList;
+	}
+
+	public User getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
+	}
+
+	public Class getClasses() {
+		return classes;
+	}
+
+	public void setClasses(Class classes) {
+		this.classes = classes;
+	}
+
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -109,12 +151,12 @@ public class Votetopic  implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getItems() {
-		return this.items;
+	public Integer getTotalCount() {
+		return totalCount;
 	}
 
-	public void setItems(String items) {
-		this.items = items;
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
 	}
 
 	public String getTeacherName() {

@@ -1,10 +1,15 @@
 package com.yaorange.tqt.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yaorange.tqt.mapper.LeaveMapper;
 import com.yaorange.tqt.mapper.TaskMapper;
 import com.yaorange.tqt.pojo.ComLeave;
+import com.yaorange.tqt.pojo.Comment;
 import com.yaorange.tqt.pojo.Task;
 import com.yaorange.tqt.service.LeaveService;
 import com.yaorange.tqt.utils.PageResultNew;
@@ -12,8 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author:zjj
@@ -31,7 +39,8 @@ public class LeaveServiceImpl implements LeaveService {
     @Autowired
     private TaskMapper taskMapper;
 
-
+    @Autowired
+    private ObjectMapper objectMapper;
     @Override
     public PageResultNew<ComLeave> findByPage(Integer pageNo, Integer pageSize, String keyWord) {
         PageResultNew<ComLeave> pageResult  = new PageResultNew<>();
@@ -54,8 +63,17 @@ public class LeaveServiceImpl implements LeaveService {
     public void addLeave(ComLeave comLeave) {
         //模拟用户
         comLeave.setUserId(199L);
-
+        comLeave.setCreateBy("模拟用户");
+        String taskId = UUID.randomUUID().toString().replaceAll("-", "");
+        comLeave.setTaskId(taskId);
         leaveMapper.insert(comLeave);
+        Task task = new Task();
+        task.setId(taskId);
+        task.setAssignee(comLeave.getReviewer());
+        task.setComments(comLeave.getReason());
+        task.setName("模拟用户");
+        task.setUserId(199L);
+        taskMapper.insertSelective(task);
     }
 
     @Override
@@ -77,4 +95,67 @@ public class LeaveServiceImpl implements LeaveService {
         return pageResult;
     }
 
+    @Override
+    public List<Comment> getCommentsByTaskId(String id) {
+        Example example = new Example(ComLeave.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("taskId",id);
+        ComLeave comLeave = leaveMapper.selectOneByExample(example);
+        return jsonToCommentList(comLeave);
+
+    }
+
+
+    @Override
+    public ComLeave findLeaveByTaskId(String taskId) {
+        Example example = new Example(ComLeave.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("taskId",taskId);
+        return leaveMapper.selectOneByExample(example);
+    }
+
+    @Override
+    public void updateTask(ComLeave comLeave) {
+        List<Comment> commentList = jsonToCommentList(comLeave);
+        String commentJson = comLeave.getNewComment();
+        Comment comment = new Comment();
+        comment.setFullMessage(commentJson);
+        commentList.add(comment);
+        String json = commentListToJson(commentList);
+        comLeave.setComments(json);
+        leaveMapper.updateByPrimaryKeySelective(comLeave);
+    }
+
+
+    /**
+     * 将List<Comment>转换为json
+     * @param comLeave
+     * @return
+     */
+    private List<Comment> jsonToCommentList(ComLeave comLeave){
+        try {
+            JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, Comment.class);
+            List<Comment> comments = objectMapper.readValue(comLeave.getComments(), javaType);
+            return comments;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.info("json转换到List<Comment>错误");
+            return null;
+        }
+    }
+
+    /**
+     * 将json转换为Comment
+     * @param comments
+     * @return
+     */
+    private String commentListToJson(List<Comment> comments){
+        try {
+            return objectMapper.writeValueAsString(comments);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.info("List<Comment>转换到json错误");
+            return null;
+        }
+    }
 }

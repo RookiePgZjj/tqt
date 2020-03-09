@@ -4,6 +4,7 @@ import com.yaorange.tqt.pojo.Votetopic;
 import com.yaorange.tqt.service.impl.VoteTopicServiceImpl;
 import com.yaorange.tqt.utils.PageResultNew;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,5 +28,20 @@ public class VoteTopicController {
             @RequestParam("keyWord") String keyWord
     ){
         return voteTopicService.findAllByPage(pageNo,pageSize);
+    }
+
+    @GetMapping()
+    public PageResultNew<Votetopic> queryVoteTopic(
+            @RequestParam("pageNo") Integer pageNo,
+            @RequestParam("pageSize") Integer pageSize,
+            @RequestParam("keyWord") String keyWord
+    ){
+        return voteTopicService.findAllByPage(pageNo,pageSize);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addVoteTopic(@RequestBody Votetopic votetopic){
+        voteTopicService.addVoteTopic(votetopic);
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,6 +1,7 @@
 package com.yaorange.tqt.service;
 
 import com.yaorange.tqt.pojo.ComLeave;
+import com.yaorange.tqt.pojo.Comment;
 import com.yaorange.tqt.pojo.Task;
 import com.yaorange.tqt.utils.PageResultNew;
 
@@ -20,4 +21,10 @@ public interface LeaveService {
     void deleteById(List<Long> ids);
 
     PageResultNew<Task> findAllTask(Integer pageNo, Integer pageSize);
+
+    List<Comment> getCommentsByTaskId(String id);
+
+    ComLeave findLeaveByTaskId(String taskId);
+
+    void updateTask(ComLeave comLeave);
 }

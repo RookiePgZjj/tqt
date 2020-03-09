@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description  
@@ -52,7 +53,7 @@ public class ComLeave  implements Serializable {
 	 * taskId
 	 */
    	@Column(name = "taskId" )
-	private Long taskId;
+	private String taskId;
 
 	/**
 	 * 结束时间
@@ -65,6 +66,46 @@ public class ComLeave  implements Serializable {
 	 */
    	@Column(name = "userId" )
 	private Long userId;
+
+   	@Column(name = "create_by")
+	private String createBy;
+
+
+	/**
+	 * 持久化的comments
+	 */
+	@Column(name = "comments")
+	private String comments;
+
+	/**
+	 * 接收前端新传的comment
+	 */
+   	@Transient
+	private String newComment;
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getNewComment() {
+		return newComment;
+	}
+
+	public void setNewComment(String newComment) {
+		this.newComment = newComment;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
 
 	public Long getId() {
 		return this.id;
@@ -106,11 +147,11 @@ public class ComLeave  implements Serializable {
 		this.reason = reason;
 	}
 
-	public Long getTaskId() {
+	public String getTaskId() {
 		return this.taskId;
 	}
 
-	public void setTaskId(Long taskId) {
+	public void setTaskId(String taskId) {
 		this.taskId = taskId;
 	}
 

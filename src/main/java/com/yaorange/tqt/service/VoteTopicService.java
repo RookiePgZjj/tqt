@@ -10,4 +10,6 @@ import com.yaorange.tqt.utils.PageResultNew;
  */
 public interface VoteTopicService {
     PageResultNew<Votetopic> findAllByPage(Integer pageNo, Integer pageSize);
+
+    void addVoteTopic(Votetopic votetopic);
 }

@@ -10,5 +10,5 @@ import java.util.List;
  * @description:
  */
 public interface VoteSubtopicService {
-    List<Votesubtopic> findByParentId(Long parentId);
+    List<Votesubtopic> findByParentId(String parentId);
 }

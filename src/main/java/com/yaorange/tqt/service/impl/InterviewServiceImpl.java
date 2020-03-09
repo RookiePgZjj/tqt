@@ -1,5 +1,4 @@
 package com.yaorange.tqt.service.impl;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yaorange.tqt.mapper.InterviewMapper;
@@ -66,7 +65,7 @@ public class InterviewServiceImpl implements InterviewService {
         Example.Criteria criteria = example.createCriteria();
 
         if (classId != null) {
-            criteria.andLike("classId", "%"+classId+"%");
+            criteria.andEqualTo("classId", classId);
         }
         if (!"".equals(stuName)) {
             criteria.andLike("stuName", "%"+stuName+"%");
@@ -128,7 +127,7 @@ public class InterviewServiceImpl implements InterviewService {
             String stuName = serachFormVO.getStuName();
             String companyName = serachFormVO.getCompanyName();
             if (classId != null) {
-                criteria.andLike("classId", "%"+classId+"%");
+                criteria.andEqualTo("classId", classId);
             }
             if (!"".equals(stuName)) {
                 criteria.andLike("stuName", "%"+stuName+"%");

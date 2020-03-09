@@ -1,6 +1,7 @@
 package com.yaorange.tqt.controller;
 
 import com.yaorange.tqt.pojo.ComLeave;
+import com.yaorange.tqt.pojo.Comment;
 import com.yaorange.tqt.pojo.Task;
 import com.yaorange.tqt.service.impl.LeaveServiceImpl;
 import com.yaorange.tqt.utils.PageResultNew;
@@ -69,6 +70,27 @@ public class LeaveController {
                                                   @RequestParam("pageSize") Integer pageSize,
                                                   @RequestParam("keyWord") String keyWord) {
        return leaveService.findAllTask(pageNo,pageSize);
+    }
+
+
+    @GetMapping("/comments/{id}")
+    public List<Comment> getComments(@PathVariable("id")String id){
+        return leaveService.getCommentsByTaskId(id);
+
+    }
+
+
+    @GetMapping("/taskDetail/{taskId}")
+    public ComLeave getLeave(@PathVariable("taskId")String taskId){
+        return leaveService.findLeaveByTaskId(taskId);
+    }
+
+
+    @PutMapping("/complete/{taskId}")
+    public ResponseEntity<Void> updateTask(@PathVariable("taskId") String taskId,
+                                           @RequestBody ComLeave comLeave){
+        leaveService.updateTask(comLeave);
+        return ResponseEntity.ok().build();
     }
 
 

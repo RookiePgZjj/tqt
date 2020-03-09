@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface VoteSubtopicMapper extends Mapper<Votesubtopic> {
     @Select("select * from votesubtopic where parent_id = #{parentId}")
-    List<Votesubtopic> selectByParentId(@Param("parentId") Long parentId);
+    List<Votesubtopic> selectByParentId(@Param("parentId") String parentId);
 }
