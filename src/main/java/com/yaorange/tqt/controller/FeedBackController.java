@@ -2,12 +2,14 @@ package com.yaorange.tqt.controller;
 import com.yaorange.tqt.pojo.TeaFaceBack;
 import com.yaorange.tqt.service.impl.FeedBackServiceImpl;
 import com.yaorange.tqt.utils.PageResultNew;
+import com.yaorange.tqt.vo.FeedBackTeachingVo;
 import com.yaorange.tqt.vo.FeedBackVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author:zjj
@@ -70,5 +72,17 @@ public class FeedBackController {
     public ResponseEntity<Void> deleteFeedBack(@RequestBody List<Long> ids){
         feedBackService.deleteByIds(ids);
         return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 教学反馈，分页
+     *
+     */
+    @PostMapping("teaching")
+    public FeedBackTeachingVo getPage(
+            @RequestParam("pageNo") Integer pageNo,
+            @RequestParam("pageSize") Integer pageSize,
+            @RequestBody Map<String,Long> map){
+        return feedBackService.findTeachingByPage(pageNo,pageSize,map);
     }
 }

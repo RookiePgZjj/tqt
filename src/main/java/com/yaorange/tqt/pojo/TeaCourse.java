@@ -3,9 +3,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity

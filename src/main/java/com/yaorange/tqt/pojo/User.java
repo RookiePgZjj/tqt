@@ -3,9 +3,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
@@ -43,7 +43,16 @@ public class User implements Serializable {
    	@Transient
 	private UserInfo userInfo;
 
+   	@Transient
+	private Class aclass;
 
+	public Class getAclass() {
+		return aclass;
+	}
+
+	public void setAclass(Class aclass) {
+		this.aclass = aclass;
+	}
 
 	public UserInfo getUserInfo() {
 		return userInfo;

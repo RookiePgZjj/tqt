@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
@@ -81,11 +81,25 @@ public class TeaFaceBack  implements Serializable {
 	 */
    	@Column(name = "adjustment" )
 	private String adjustment;
-
+	/**
+	 *班级id
+	 */
+	@Column(name = "class_id")
+	private Long classId;
 
    	@Transient
 	private TeaCourse course;
 
+   	@Transient
+	private UserInfo userInfo;
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
 
 	public TeaCourse getCourse() {
 		return course;
@@ -183,4 +197,11 @@ public class TeaFaceBack  implements Serializable {
 		this.adjustment = adjustment;
 	}
 
+	public Long getClassId() {
+		return classId;
+	}
+
+	public void setClassId(Long classId) {
+		this.classId = classId;
+	}
 }

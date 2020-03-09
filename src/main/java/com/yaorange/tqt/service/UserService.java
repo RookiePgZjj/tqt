@@ -21,5 +21,10 @@ public interface UserService {
 
     String findNameByUserId(long userId);
 
+    List<User> selectByClassId(Long classId);
+
+    List<User> selectAll();
+
+
     void updateRole(User user);
 }
