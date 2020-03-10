@@ -81,7 +81,11 @@ public class TeaFaceBack  implements Serializable {
      */
     @Column(name = "adjustment" )
     private String adjustment;
-
+    /***
+     * 班级ID
+     */
+    @Column(name = "class_id")
+    private Integer classId;
 
     @Transient
     private TeaCourse course;
@@ -101,6 +105,18 @@ public class TeaFaceBack  implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 
     public Long getUserId() {

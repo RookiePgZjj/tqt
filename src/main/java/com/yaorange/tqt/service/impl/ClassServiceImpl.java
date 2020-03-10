@@ -2,10 +2,9 @@ package com.yaorange.tqt.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yaorange.tqt.mapper.ClassMapper;
-import com.yaorange.tqt.mapper.UserMapper;
+import com.yaorange.tqt.mapper.*;
+import com.yaorange.tqt.pojo.*;
 import com.yaorange.tqt.pojo.Class;
-import com.yaorange.tqt.pojo.User;
 import com.yaorange.tqt.service.ClassService;
 import com.yaorange.tqt.utils.PageResult;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,15 @@ public class ClassServiceImpl implements ClassService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private FeedBackMapper feedBackMapper;
+
+    @Resource
+    private TeaQuesstionMapper teaQuesstionMapper;
+
+    @Resource
+    private VoteTopicMapper voteTopicMapper;
     @Override
     public List<Class> findAll() {
         List<Class> roles = classMapper.selectAll();
@@ -69,6 +77,7 @@ public class ClassServiceImpl implements ClassService {
     public void deleteClass(Integer[] cids) {
         for(Integer cid:cids){
             //所有与课程相关的用户的课程Id设置为空
+            //用户
             User user = new User();
             user.setClassId(Long.valueOf(cid));
             List<User> users = userMapper.select(user);
@@ -76,7 +85,30 @@ public class ClassServiceImpl implements ClassService {
                 us.setClassId(null);
                 userMapper.updateByPrimaryKey(us);
             }
-            //其他表的操作 未完成
+            //反馈
+            TeaFaceBack teaFaceBack = new TeaFaceBack();
+            teaFaceBack.setClassId(cid);
+            List<TeaFaceBack> teaFaceBacks = feedBackMapper.select(teaFaceBack);
+            for(TeaFaceBack tfb:teaFaceBacks){
+                tfb.setClassId(null);
+                feedBackMapper.updateByPrimaryKey(tfb);
+            }
+            //teaQueues
+            TeaQuesstion teaQuesstion = new TeaQuesstion();
+            teaQuesstion.setClassId(cid);
+            List<TeaQuesstion> teaQuesstions = teaQuesstionMapper.select(teaQuesstion);
+            for(TeaQuesstion tq:teaQuesstions ){
+                tq.setClassId(null);
+                teaQuesstionMapper.updateByPrimaryKey(tq);
+            }
+            //voteTopic
+            Votetopic votetopic = new Votetopic();
+            votetopic.setClassId(Long.valueOf(cid));
+            List<Votetopic> votetopics = voteTopicMapper.select(votetopic);
+            for(Votetopic vt:votetopics ){
+                vt.setClassId(null);
+                voteTopicMapper.updateByPrimaryKey(vt);
+            }
             Class a = classMapper.selectByPrimaryKey(cid);
             classMapper.delete(a);
         }

@@ -42,11 +42,13 @@ public class ReportServiceImpl implements ReportService {
             if(absorptionVo.getDateNumber() != null){
                 criteria.andEqualTo("dateNumber",absorptionVo.getDateNumber());
             }
-            if("" .equals(absorptionVo.getStuName())){
-                //根据姓名查找用户ID
+            //根据姓名查找用户ID
+            if(!"" .equals(absorptionVo.getStuName())){
+                //用户名存在
                 UserInfo userInfo = new UserInfo();
-                userInfo.setName(absorptionVo.getStuName());
-                List<UserInfo> userInfos = userInfoMapper.select(userInfo);
+                Example userInfoExample = new Example(UserInfo.class);
+                userInfoExample.createCriteria().andLike("name","%"+absorptionVo.getStuName()+"%");
+                List<UserInfo> userInfos = userInfoMapper.selectByExample(userInfoExample);
                 for(UserInfo userInfo1:userInfos){
                     criteria.andEqualTo("userId",userInfo1.getUserId());
                     TeaFaceBack teaFaceBack = reportMapper.selectOneByExample(example);

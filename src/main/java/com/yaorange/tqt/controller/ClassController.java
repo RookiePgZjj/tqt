@@ -56,8 +56,7 @@ public class ClassController {
     @DeleteMapping
     public ResponseEntity<String> udeleteClass(@RequestBody Integer[] cids){
         if(cids.length!=0){
-            //未完成 service需要做其他操作
-           // classService.deleteClass(cids);
+            classService.deleteClass(cids);
             return ResponseEntity.ok("1");
         }
         return ResponseEntity.ok("0");

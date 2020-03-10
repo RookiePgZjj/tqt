@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @Description  
+ * @Description
  * @Author
- * @Date 2020-03-06 
+ * @Date 2020-03-06
  */
 
 @Entity
@@ -18,7 +18,7 @@ public class Votetopic  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
    	@Column(name = "id" )
-	private Long id;
+	private String id;
 
    	@Column(name = "title" )
 	private String title;
@@ -47,82 +47,67 @@ public class Votetopic  implements Serializable {
    	@Column(name = "items" )
 	private String items;
 
-	/**
-	 * 老师名字
-	 */
-   	@Column(name = "teacherName" )
-	private String teacherName;
+   	@Column
+    private Integer total_count;
 
 
-	/**
-	 * 班级名
-	 */
-	@Column(name = "className" )
-	private String className;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public String getId() {
+        return id;
+    }
 
-	public String getClassName() {
-		return className;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public Long getClassId() {
+        return classId;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public Long getClassId() {
-		return this.classId;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public void setClassId(Long classId) {
-		this.classId = classId;
-	}
+    public String getItems() {
+        return items;
+    }
 
-	public Long getUserId() {
-		return this.userId;
-	}
+    public void setItems(String items) {
+        this.items = items;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public Integer getTotal_count() {
+        return total_count;
+    }
 
-	public String getItems() {
-		return this.items;
-	}
-
-	public void setItems(String items) {
-		this.items = items;
-	}
-
-	public String getTeacherName() {
-		return this.teacherName;
-	}
-
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
-	}
-
+    public void setTotal_count(Integer total_count) {
+        this.total_count = total_count;
+    }
 }
