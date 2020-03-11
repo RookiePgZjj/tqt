@@ -25,9 +25,7 @@ public class UserController {
                                                      @RequestParam("access_token") String access_token,
                                                      @RequestBody SeachUser seachUser
     ) {
-        if (pageNo == null) {
-            pageNo = 1;
-        }
+
         if (pageSize == null) {
             pageSize = 5;
         }
@@ -102,6 +100,7 @@ public class UserController {
         userService.updateRole(user);
         return ResponseEntity.ok().build();
     }
+
     /**
      * 查询班级里的学生
      */

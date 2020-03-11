@@ -55,32 +55,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> selectByClassId(Long classId) {
-        List<User> userList = userMapper.selectByClassId(classId);
-        for (User user :userList) {
-            Long classId1 = user.getClassId();
-            Class aClass = classMapper.selectByPrimaryKey(classId1);
-            user.setAclass(aClass);
-            Long userId = user.getUserId();
-            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
-            user.setUserInfo(userInfo);
-        }
-        return userList;
-    }
-
-    @Override
-    public List<User> selectAll() {
-        List<User> userList = userMapper.selectAll();
-        for (User user:userList) {
-            Long userId = user.getUserId();
-            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
-            user.setUserInfo(userInfo);
-        }
-        return userList;
-    }
-
-
-    @Override
     public PageResult<User> pageUser(Integer pageNo, Integer pageSize, SeachUser seachUser) {
 
         PageHelper.startPage(pageNo, pageSize);
@@ -155,7 +129,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User sysUser) {
         userMapper.updateByPrimaryKey(sysUser);
-        userInfoMapper.updateByPrimaryKeySelective(sysUser.getUserInfo());
+        userInfoMapper.updateByPrimaryKey(sysUser.getUserInfo());
     }
 
     @Override
@@ -174,5 +148,31 @@ public class UserServiceImpl implements UserService {
    @Override
     public void updateRole(User user) {
         userMapper.updateByPrimaryKey(user);
+    }
+
+
+    @Override
+    public List<User> selectByClassId(Long classId) {
+        List<User> userList = userMapper.selectByClassId(classId);
+        for (User user :userList) {
+            Long classId1 = user.getClassId();
+            Class aClass = classMapper.selectByPrimaryKey(classId1);
+            user.setAclass(aClass);
+            Long userId = user.getUserId();
+            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
+            user.setUserInfo(userInfo);
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> selectAll() {
+        List<User> userList = userMapper.selectAll();
+        for (User user:userList) {
+            Long userId = user.getUserId();
+            UserInfo userInfo = userInfoMapper.selectByUserId(userId);
+            user.setUserInfo(userInfo);
+        }
+        return userList;
     }
 }

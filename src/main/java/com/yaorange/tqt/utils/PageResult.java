@@ -15,6 +15,16 @@ public class PageResult<T> {
     private Long total;// 总条数
     private Long totalPage;// 总页数
     private Long number;
+    private Long size;
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
     private List<T> items;// 当前页数据
 
     public PageResult() {

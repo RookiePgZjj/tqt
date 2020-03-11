@@ -10,7 +10,6 @@ public class TeaKnowledge {
     @Id
     private Long knowledgeId;
 
-    @Column(name = "knowledge_name")
     private String name;
 
     private Long courseId;

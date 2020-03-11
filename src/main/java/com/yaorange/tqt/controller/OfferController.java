@@ -31,12 +31,17 @@ public class OfferController {
         offerService.updateOffer(offer);
         return ResponseEntity.ok("1");
     }
-//    /api/offer/entry/' + params.row.offerId + '/' + (!params.row.isEntry),
 
     @PutMapping("entry/{offerId}/{isEntry}")
     public ResponseEntity<String> updateEntry(@PathVariable("offerId") Integer offerId,
                                               @PathVariable("isEntry")String isEntry){
         offerService.updateEntry(offerId,isEntry);
+        return ResponseEntity.ok("1");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteOffer(@RequestBody List<Long> ids){
+        offerService.deleteByIds(ids);
         return ResponseEntity.ok("1");
     }
 }

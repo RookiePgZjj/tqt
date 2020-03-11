@@ -1,8 +1,6 @@
 package com.yaorange.tqt.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +16,8 @@ public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID =  4428862416774062511L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
    	@Column(name = "id" )
 	private Long id;
 

@@ -39,4 +39,12 @@ public class OfferServiceImpl implements OfferService {
         offer.setIsEntry(isEntry);
         offerMapper.updateByPrimaryKey(offer);
     }
+
+    @Override
+    public void deleteByIds(List<Long> ids) {
+        ids.forEach(id->{
+            offerMapper.deleteByPrimaryKey(id);
+        });
+    }
+
 }

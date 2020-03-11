@@ -42,16 +42,21 @@ public class VoteReplyServiceImpl implements VoteReplyService {
 
         //模拟用户
         Long currentUser = 3L;
-
+        Integer count = 0;
         Votetopic votetopic = voteTopicMapper.selectByPrimaryKey(voteTopicId);
         for (VoteReply voteReply:voteReplies
              ) {
             voteReply.setUserId(currentUser);
+            VoteReply voteReplyOld = voteReplyMapper.selectByUserIdAndSubtopicId(currentUser, voteReply.getSubtopicId());
+            if (voteReplyOld != null){
+                count += 1;
+                voteReplyMapper.delete(voteReplyOld);
+            }
             voteReplyMapper.insert(voteReply);
-            Votesubtopic votesubtopic = voteSubtopicMapper.selectByPrimaryKey(voteReply.getSubtopicId());
-            voteSubtopicMapper.updateByPrimaryKeySelective(votesubtopic);
         }
-        votetopic.setTotalCount(votetopic.getTotalCount()+1);
+        if (count == 0){
+            votetopic.setTotalCount(votetopic.getTotalCount()+1);
+        }
         voteTopicMapper.updateByPrimaryKeySelective(votetopic);
     }
 

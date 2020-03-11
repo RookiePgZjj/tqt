@@ -12,4 +12,6 @@ public interface OfferService {
     void updateOffer(Offer offer);
 
     void updateEntry(Integer offerId, String isEntry);
+
+    void deleteByIds(List<Long> ids);
 }
