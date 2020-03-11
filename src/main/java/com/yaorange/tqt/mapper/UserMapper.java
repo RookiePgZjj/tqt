@@ -19,4 +19,9 @@ public interface UserMapper extends Mapper<User> {
 
     @Select("select * from sys_user where class_id=#{classId}")
     List<User> selectByClassId(@Param("classId") Long classId);
+
+
+    @Select("select user_id from sys_user where role_id =3")
+    List<Long> selectAllStuId();
+
 }

@@ -64,6 +64,7 @@ public class LeaveServiceImpl implements LeaveService {
         //模拟用户
         comLeave.setUserId(199L);
         comLeave.setCreateBy("模拟用户");
+
         String taskId = UUID.randomUUID().toString().replaceAll("-", "");
         comLeave.setTaskId(taskId);
         leaveMapper.insert(comLeave);
@@ -79,6 +80,8 @@ public class LeaveServiceImpl implements LeaveService {
     @Override
     public void deleteById(List<Long> ids) {
         ids.forEach(id ->{
+            ComLeave comLeave = leaveMapper.selectByPrimaryKey(id);
+            taskMapper.deleteByPrimaryKey(comLeave.getTaskId());
             leaveMapper.deleteByPrimaryKey(id);
         });
     }
@@ -101,8 +104,10 @@ public class LeaveServiceImpl implements LeaveService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("taskId",id);
         ComLeave comLeave = leaveMapper.selectOneByExample(example);
-        return jsonToCommentList(comLeave);
-
+        if (comLeave != null) {
+            return jsonToCommentList(comLeave);
+        }
+        return null;
     }
 
 
@@ -117,6 +122,9 @@ public class LeaveServiceImpl implements LeaveService {
     @Override
     public void updateTask(ComLeave comLeave) {
         List<Comment> commentList = jsonToCommentList(comLeave);
+        if (commentList == null){
+            commentList = new ArrayList<>();
+        }
         String commentJson = comLeave.getNewComment();
         Comment comment = new Comment();
         comment.setFullMessage(commentJson);
@@ -135,8 +143,13 @@ public class LeaveServiceImpl implements LeaveService {
     private List<Comment> jsonToCommentList(ComLeave comLeave){
         try {
             JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, Comment.class);
-            List<Comment> comments = objectMapper.readValue(comLeave.getComments(), javaType);
-            return comments;
+            if (null != comLeave.getComments()){
+                List<Comment> comments = objectMapper.readValue(comLeave.getComments(), javaType);
+                return comments;
+            }else {
+                return null;
+            }
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.info("json转换到List<Comment>错误");
@@ -151,11 +164,26 @@ public class LeaveServiceImpl implements LeaveService {
      */
     private String commentListToJson(List<Comment> comments){
         try {
-            return objectMapper.writeValueAsString(comments);
+            if (comments != null){
+                return objectMapper.writeValueAsString(comments);
+            }
+            return null;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.info("List<Comment>转换到json错误");
             return null;
         }
+    }
+
+
+    @Override
+    public void deleteTaskById(List<String> ids) {
+        ids.forEach(id ->{
+            Example example = new Example(ComLeave.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("taskId",id);
+            leaveMapper.deleteByExample(example);
+            taskMapper.deleteByPrimaryKey(id);
+        });
     }
 }

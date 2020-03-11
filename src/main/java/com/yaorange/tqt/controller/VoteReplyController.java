@@ -37,7 +37,11 @@ public class VoteReplyController {
         return ResponseEntity.ok().build();
     }
 
-
+    /**
+     * 查询调查结果
+     * @param voteTopicId
+     * @return
+     */
     @GetMapping("/voteRecord/all/{voteTopicId}")
     public List<VoteRecordVO> queryVoteRecord(@PathVariable("voteTopicId")String voteTopicId){
         return voteReplyService.selectVoteRecord(voteTopicId);

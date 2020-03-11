@@ -46,12 +46,6 @@ public class Votesubtopic  implements Serializable {
 	private String parentId;
 
 
-	/**
-	 * 得分
-	 * @return
-	 */
-	@Column(name = "reply")
-	private Long reply;
 
 
 	@Transient
@@ -66,13 +60,6 @@ public class Votesubtopic  implements Serializable {
 		this.voteReplyList = voteReplyList;
 	}
 
-	public Long getReply() {
-		return reply;
-	}
-
-	public void setReply(Long reply) {
-		this.reply = reply;
-	}
 
 	public Long getId() {
 		return this.id;

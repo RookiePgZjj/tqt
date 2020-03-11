@@ -58,6 +58,12 @@ public class LeaveController {
     }
 
 
+    @DeleteMapping("/task")
+    public ResponseEntity<Void> deleteTask(@RequestBody List<String> ids){
+        leaveService.deleteTaskById(ids);
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * 查询所有任务
      * @param pageNo

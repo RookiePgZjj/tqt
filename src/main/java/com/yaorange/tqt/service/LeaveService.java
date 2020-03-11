@@ -27,4 +27,6 @@ public interface LeaveService {
     ComLeave findLeaveByTaskId(String taskId);
 
     void updateTask(ComLeave comLeave);
+
+    void deleteTaskById(List<String> ids);
 }

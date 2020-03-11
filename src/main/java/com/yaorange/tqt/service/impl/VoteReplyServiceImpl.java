@@ -33,6 +33,9 @@ public class VoteReplyServiceImpl implements VoteReplyService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
 
     @Override
     public void addVoteReplies(String voteTopicId, List<VoteReply> voteReplies) {
@@ -41,43 +44,41 @@ public class VoteReplyServiceImpl implements VoteReplyService {
         Long currentUser = 3L;
 
         Votetopic votetopic = voteTopicMapper.selectByPrimaryKey(voteTopicId);
-        Integer totalCount = 0;
         for (VoteReply voteReply:voteReplies
              ) {
             voteReply.setUserId(currentUser);
             voteReplyMapper.insert(voteReply);
-            Long reply = voteReply.getReply();
-            totalCount += reply.intValue();
             Votesubtopic votesubtopic = voteSubtopicMapper.selectByPrimaryKey(voteReply.getSubtopicId());
-            votesubtopic.setReply(reply);
             voteSubtopicMapper.updateByPrimaryKeySelective(votesubtopic);
         }
-        votetopic.setTotalCount(totalCount);
+        votetopic.setTotalCount(votetopic.getTotalCount()+1);
         voteTopicMapper.updateByPrimaryKeySelective(votetopic);
     }
 
 
     @Override
     public List<VoteRecordVO> selectVoteRecord(String voteTopicId) {
-        Votetopic votetopic = voteTopicMapper.selectByPrimaryKey(voteTopicId);
         Example example = new Example(Votesubtopic.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("parentId",voteTopicId);
+//        查询该调查的所有子项
         List<Votesubtopic> votesubtopics = voteSubtopicMapper.selectByExample(example);
-        if (votesubtopics.size()>0){
-            Votesubtopic votesubtopic = votesubtopics.get(0);
-            Example recordExample = new Example(VoteReply.class);
-            Example.Criteria recordCriteria = recordExample.createCriteria();
-            recordCriteria.andEqualTo("subtopicId",votesubtopic.getId());
-            List<VoteReply> voteReplies = voteReplyMapper.selectByExample(recordExample);
-            List<VoteRecordVO> stus= new ArrayList<>();
-            for (VoteReply v:voteReplies
+        List<VoteRecordVO> stus= new ArrayList<>();
+//        查询所有学生的id
+        List<Long> stuIds =  userMapper.selectAllStuId();
+        for (Long stuId:stuIds
+             ) {
+            List<VoteReply> voteReplyList = new ArrayList<>();
+            UserInfo userInfo = userInfoMapper.selectByUserId(stuId);
+            for (Votesubtopic vs:votesubtopics
                  ) {
-                UserInfo userInfo = userInfoMapper.selectByUserId(v.getUserId());
-                stus.add(new VoteRecordVO(userInfo.getName()));
+//                根据调查项id和学生id查询reply
+                VoteReply voteReply = voteReplyMapper.selectByUserIdAndSubtopicId(stuId, vs.getId());
+                voteReplyList.add(voteReply);
             }
-            return stus;
+            VoteRecordVO voteRecordVO = new VoteRecordVO(userInfo.getName(), voteReplyList);
+            stus.add(voteRecordVO);
         }
-        return null;
+        return stus;
     }
 }

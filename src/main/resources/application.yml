@@ -17,3 +17,8 @@ mybatis:
 logging:
       level:
         com.yaorange.tqt.mapper: debug
+up:
+  imageRoot: E:\nginx-1.16.1\html\images\
+  musicRoot: E:\nginx-1.16.1\html\music\
+  prefixImage: http://localhost/images/
+  prefixMusic: http://localhost/music/

@@ -87,11 +87,23 @@ public class TeaFaceBack  implements Serializable {
 	@Column(name = "class_id")
 	private Long classId;
 
+	@Column(name = "courseName")
+	private String courseName;
+
    	@Transient
 	private TeaCourse course;
 
    	@Transient
 	private UserInfo userInfo;
+
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
 
 	public UserInfo getUserInfo() {
 		return userInfo;
