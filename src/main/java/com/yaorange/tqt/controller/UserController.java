@@ -56,10 +56,11 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     /***
-     * 跟新
+     * 更新
      */
     @PutMapping("update")
     public ResponseEntity<Void> updateUser(@RequestBody User sysUser, @RequestParam("access_token") String access_token) {
+        System.out.println(sysUser);
         userService.updateUser(sysUser);
         return ResponseEntity.ok().build();
     }

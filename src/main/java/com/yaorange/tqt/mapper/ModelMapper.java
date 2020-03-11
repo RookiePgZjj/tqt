@@ -7,7 +7,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
-
 public interface ModelMapper extends Mapper<Model> {
 
     @Select("SELECT m.id,m.`name`,m.`status`,m.explain1,m.parent_id from sys_model m,sys_role r,role_model rm where rm.model_id=m.id and rm.role_id = r.role_id  and rm.role_id = #{roleId}")

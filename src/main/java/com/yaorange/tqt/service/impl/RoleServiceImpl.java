@@ -17,7 +17,6 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {

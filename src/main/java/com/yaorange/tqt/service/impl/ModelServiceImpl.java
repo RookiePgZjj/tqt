@@ -25,7 +25,6 @@ public class ModelServiceImpl implements ModelService {
     @Resource
     private RoleModelMapper roleModelMapper;
 
-
     @Override
     public List<Model> findAll() {
         return modelMapper.selectAll();

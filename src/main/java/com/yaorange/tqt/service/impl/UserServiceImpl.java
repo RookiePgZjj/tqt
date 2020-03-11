@@ -171,9 +171,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-
-    @Override
-
+   @Override
     public void updateRole(User user) {
         userMapper.updateByPrimaryKey(user);
     }

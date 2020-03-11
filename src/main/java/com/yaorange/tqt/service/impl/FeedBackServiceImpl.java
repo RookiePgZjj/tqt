@@ -58,6 +58,9 @@ public class FeedBackServiceImpl implements FeedBackService {
     @Autowired
     private CourseServiceImpl courseService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
 
     @Override
     public PageResultNew<FeedBackVo> findAllByPage(Integer pageNo, Integer pageSize, String keyWord) {
@@ -100,7 +103,7 @@ public class FeedBackServiceImpl implements FeedBackService {
     public void updateFeedBack(TeaFaceBack teaFaceBack) {
 
         int update = feedBackMapper.update(teaFaceBack);
-        log.info(update + "");
+        log.info(update+"");
     }
 
     @Override
@@ -116,7 +119,7 @@ public class FeedBackServiceImpl implements FeedBackService {
 
     @Override
     public void deleteByIds(List<Long> ids) {
-        ids.forEach(id -> {
+        ids.forEach(id ->{
             feedBackMapper.deleteByPrimaryKey(id);
         });
     }
